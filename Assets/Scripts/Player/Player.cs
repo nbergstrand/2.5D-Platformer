@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -16,24 +17,22 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _jumpHeight = 10f;
 
+    bool _canJump;
+
     [SerializeField]
     private int _score;
 
     [SerializeField]
     private int _lives;
-
-    [SerializeField]
-    Vector3 _startPos;
-
+    
     private float _yVelocity;
-
-    bool _canJump;
-    bool _isAlive;
-
+       
     public static Action<int> OnLivesChange;
     
     void Start()
     {
+        GameManager.Instance.SetStartPosition(transform.position);
+
         _controller = GetComponent<CharacterController>();
 
         if (OnLivesChange != null)
@@ -71,14 +70,22 @@ public class Player : MonoBehaviour
 
         _controller.Move(velocity * Time.deltaTime);
 
-        if(transform.position.y < -10.0)
+
+
+    }
+
+    public void KillPlayer()
+    {
+        _lives--;
+        transform.position = GameManager.Instance.StartPosition;
+
+        if (OnLivesChange != null)
+            OnLivesChange(_lives);
+
+        if(_lives <= 0)
         {
-            _lives--;
-            transform.position = _startPos;
-
-            if (OnLivesChange != null)
-                OnLivesChange(_lives);
-
+            GameManager.Instance.ResetScore();
+            SceneManager.LoadScene("Level01");
         }
 
 

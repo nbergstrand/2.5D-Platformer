@@ -40,7 +40,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            
+           
             other.transform.parent = this.gameObject.transform;
         }
     }
@@ -52,8 +52,7 @@ public class MovingPlatform : MonoBehaviour
         {
             other.transform.parent = null;
         }
-
-
+           
     }
 
 

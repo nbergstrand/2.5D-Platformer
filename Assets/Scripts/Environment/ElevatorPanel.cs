@@ -47,19 +47,5 @@ public class ElevatorPanel : MonoBehaviour
             }
         }
     }
-
-
-   /* private void OnTriggerStay(Collider other)
-    {
-        if(other.tag ==  "Player")
-        {
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-               
-               _activationLight.GetComponent<Renderer>().material.color = Color.green;
-               
-            }
-        }
-    }*/
+    
 }
