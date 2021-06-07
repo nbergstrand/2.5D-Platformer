@@ -17,16 +17,23 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _jumpHeight = 10f;
 
+    [SerializeField]
+    private float _pushForce;
+
+    private float _yVelocity;
+    
     bool _canJump;
+    bool _canWallJump;
+    private Vector3 _direction, _velocity;
+    private Vector3 _wallSurfaceNormal;
+
 
     [SerializeField]
     private int _score;
 
     [SerializeField]
     private int _lives;
-    
-    private float _yVelocity;
-       
+          
     public static Action<int> OnLivesChange;
     
     void Start()
@@ -41,35 +48,68 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        Vector3 direction = new Vector3(horizontalInput, 0f, 0f);
-        Vector3 velocity = direction * _speed;
+        
 
         if (_controller.isGrounded == true)
         {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            _direction = new Vector3(horizontalInput, 0f, 0f);
+            _velocity = _direction * _speed;
 
             _canJump = true;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _yVelocity = _jumpHeight;
+                 _yVelocity = _jumpHeight;
             }
         }
         else
-        {
-            if (_canJump && Input.GetKeyDown(KeyCode.Space))
+        {            
+
+            if (!_canWallJump && Input.GetKeyDown(KeyCode.Space))
             {
-                _yVelocity = _jumpHeight;
-                _canJump = false;
+                if(_canJump)
+                {
+                    _yVelocity = _jumpHeight;
+                    _canJump = false;
+                }
+                                
             }
 
+            if(_canWallJump && Input.GetKeyDown(KeyCode.Space))
+            {
+                _velocity = _wallSurfaceNormal * _speed;
+                _yVelocity = _jumpHeight;
+            }
+
+
+            _canWallJump = false;
             _yVelocity -= _gravity * Time.deltaTime;
         }
 
 
-        velocity.y = _yVelocity;
+        _velocity.y = _yVelocity;
 
-        _controller.Move(velocity * Time.deltaTime);
+        _controller.Move(_velocity * Time.deltaTime);
 
+
+
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+       
+        if(!_controller.isGrounded && hit.transform.tag == "Wall")
+        {
+            _canWallJump = true;
+            _wallSurfaceNormal = hit.normal;
+                       
+        }
+
+        Rigidbody rb = hit.collider.attachedRigidbody;
+        if (rb != null && !rb.isKinematic)
+        {
+            rb.velocity = hit.moveDirection * _pushForce;
+        }
 
 
     }
@@ -85,7 +125,7 @@ public class Player : MonoBehaviour
         if(_lives <= 0)
         {
             GameManager.Instance.ResetScore();
-            SceneManager.LoadScene("Level01");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
 
