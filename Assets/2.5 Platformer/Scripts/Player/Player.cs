@@ -40,8 +40,8 @@ public class Player : MonoBehaviour
     
     public static Action<int> OnLivesChange;
 
-
-
+    bool _grabbingLedge;
+    Vector3 _climbUpPosition;
     
     void Start()
     {
@@ -62,9 +62,16 @@ public class Player : MonoBehaviour
 
     void PlayerMovement()
     {
+        if(_grabbingLedge && Input.GetKeyDown(KeyCode.E))
+        {
+            _animator.SetTrigger("climbing");
+            
+        }        
+
 
         if (_controller.isGrounded == true)
         {
+            
             float horizontalInput = Input.GetAxis("Horizontal");
             _direction = new Vector3(horizontalInput, 0f, 0f);
           
@@ -86,6 +93,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            
             _animator.SetBool("falling", true);
             if (!_canWallJump && Input.GetKeyDown(KeyCode.Space))
             {
@@ -112,8 +120,10 @@ public class Player : MonoBehaviour
 
 
         _velocity.y = _yVelocity;
-        
-        _controller.Move(_velocity * Time.deltaTime);
+
+        if (_controller.enabled == true)
+            _controller.Move(_velocity * Time.deltaTime);
+
         _animator.SetFloat("speed", Mathf.Abs(_velocity.x * Time.deltaTime));
 
     }
@@ -137,6 +147,29 @@ public class Player : MonoBehaviour
 
 
     }
+
+    public void GrabLedge(Vector3 playerPosition, Vector3 climbUpPosition)
+    {
+        
+        _grabbingLedge = true;
+        
+        _velocity = Vector3.zero;
+        _controller.enabled = false;
+             
+        transform.position = playerPosition;
+        _climbUpPosition = climbUpPosition;
+        _animator.SetBool("ledgeGrab", true);
+    }
+
+    public void SetClimbUpPosition()
+    {
+        transform.position = _climbUpPosition;
+        _velocity = Vector3.zero;
+        _animator.SetBool("ledgeGrab", false);
+        _grabbingLedge = false;
+       _controller.enabled = true;
+    }
+
 
     public void KillPlayer()
     {

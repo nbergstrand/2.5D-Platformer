@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Box
+  - Ledge
   layers:
   - Default
   - TransparentFX
