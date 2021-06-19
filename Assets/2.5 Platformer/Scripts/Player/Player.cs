@@ -76,11 +76,13 @@ public class Player : MonoBehaviour
             _direction = new Vector3(horizontalInput, 0f, 0f);
           
             _velocity = _direction * _speed;
+
             _animator.SetBool("falling", false);
 
-            if(Mathf.Abs(horizontalInput) != 0)
+            if (horizontalInput != 0)
             {
                 float rotation = horizontalInput < 0 ? -180f : 0;
+
                 transform.rotation = Quaternion.Euler(0, rotation, 0f);
             }
 

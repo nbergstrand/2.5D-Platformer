@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class LedgeGrabber : MonoBehaviour
 {
+    
     [SerializeField]
-    Vector3 _playerPosition;
-
+    Transform _playerPosition;
+    
     [SerializeField]
-    Vector3 _climbUpPosition;
+    Transform _climbUpPosition;
 
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.tag == "Ledge")
         {
-            other.GetComponentInParent<Player>().GrabLedge(_playerPosition, _climbUpPosition);
+            other.GetComponentInParent<Player>().GrabLedge(_playerPosition.position, _climbUpPosition.position);
         }
     }
 }

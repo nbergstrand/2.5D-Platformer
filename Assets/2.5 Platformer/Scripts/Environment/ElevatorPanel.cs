@@ -35,14 +35,19 @@ public class ElevatorPanel : MonoBehaviour
     void CheckForInput()
     {
         float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
-                       
-        if (distanceToPlayer < 2f && GameManager.Instance.CurrentScore >= _requiredScore)
+
+        
+
+        if (distanceToPlayer < 5.5f)
         {
+           
             if (Input.GetKeyDown(KeyCode.E))
             {
                 _elevator.CallElevator();
                 _activationLight.GetComponent<Renderer>().material.color = Color.green;
+                _activationLight.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
                 _elevatorButton.GetComponent<Renderer>().material.color = Color.green;
+                _elevatorButton.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
 
             }
         }

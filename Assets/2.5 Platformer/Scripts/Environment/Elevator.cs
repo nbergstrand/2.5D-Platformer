@@ -17,7 +17,7 @@ public class Elevator : MonoBehaviour
     GameObject _panelLight;
 
     Vector3 target;
-    bool _called;
+    public bool _called;
     Player _player;
 
 
@@ -37,23 +37,34 @@ public class Elevator : MonoBehaviour
 
         if(_called)
         {
-            if (transform.position != target)
+            if (transform.position.y != target.y)
+            {
+                
                 transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+
+            }
             else
             {
                 if (target == waypoints[0].position)
                 {
+                    Debug.Log("Change Color A");
                     target = waypoints[1].position;
                     _called = false;
                     _callButton.GetComponent<Renderer>().material.color = Color.red;
+                    _callButton.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
                     _panelLight.GetComponent<Renderer>().material.color = Color.red;
+                    _panelLight.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
                 }
                 else
                 {
+                    Debug.Log("Change Color B");
                     target = waypoints[0].position;
                     _called = false;
                     _callButton.GetComponent<Renderer>().material.color = Color.red;
+                    _callButton.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
                     _panelLight.GetComponent<Renderer>().material.color = Color.red;
+                    _panelLight.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
+
                 }
             }
         }
@@ -64,13 +75,15 @@ public class Elevator : MonoBehaviour
     {
         float distance = Vector3.Distance(_player.transform.position, _callButton.transform.position);
 
-        if (distance < 2f)
+        if (distance < 5.5f)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 CallElevator();
                 _callButton.GetComponent<Renderer>().material.color = Color.green;
+                _callButton.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
                 _panelLight.GetComponent<Renderer>().material.color = Color.green;
+                _panelLight.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
             }
         }
     }
