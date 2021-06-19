@@ -25,7 +25,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position != target)
+        if (transform.position.z != target.z)
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         else
         {
