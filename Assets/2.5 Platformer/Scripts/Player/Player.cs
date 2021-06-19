@@ -51,7 +51,10 @@ public class Player : MonoBehaviour
         _controller = GetComponent<CharacterController>();
 
         if (OnLivesChange != null)
-            OnLivesChange(_lives);
+        {
+           OnLivesChange(_lives);
+        }
+            
     }
 
     void Update()

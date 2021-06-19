@@ -47,7 +47,6 @@ public class Elevator : MonoBehaviour
             {
                 if (target == waypoints[0].position)
                 {
-                    Debug.Log("Change Color A");
                     target = waypoints[1].position;
                     _called = false;
                     _callButton.GetComponent<Renderer>().material.color = Color.red;
@@ -57,7 +56,6 @@ public class Elevator : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Change Color B");
                     target = waypoints[0].position;
                     _called = false;
                     _callButton.GetComponent<Renderer>().material.color = Color.red;

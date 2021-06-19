@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Text _livesText;
 
-    private void Start()
+    private void Awake()
     {
         GameManager.OnScoreUIChange += UpdateScoreUI;
         Player.OnLivesChange += UpdateLivesUI;
@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
 
     private void UpdateLivesUI(int lives)
     {
+      
         if(_livesText != null)
             _livesText.text = "Lives: " + lives;
     }
