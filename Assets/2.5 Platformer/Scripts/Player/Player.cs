@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
     Vector3 _climbUpRotation;
     bool _grabbingLadder;
-    
+       
     
     void Start()
     {
@@ -73,7 +73,8 @@ public class Player : MonoBehaviour
 
     void PlayerMovement()
     {
-        if(_grabbingLedge && Input.GetKeyDown(KeyCode.E))
+       
+        if (_grabbingLedge && Input.GetKeyDown(KeyCode.E))
         {
             _animator.SetTrigger("climbing");
             
@@ -94,10 +95,16 @@ public class Player : MonoBehaviour
 
             return;
         }
-
+                
 
         if (_controller.isGrounded == true)
         {
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _animator.SetTrigger("roll");
+                StartCoroutine("Roll");
+            }
+
             
             float horizontalInput = Input.GetAxis("Horizontal");
             _direction = new Vector3(horizontalInput, 0f, 0f);
@@ -249,5 +256,15 @@ public class Player : MonoBehaviour
         }
 
 
+    }
+
+    IEnumerator Roll()
+    {
+        
+        _controller.center = new Vector3(0f, 0.6f, 0f);
+        _controller.height = 1f;
+        yield return new WaitForSeconds(1f);
+        _controller.center = new Vector3(0f, 1.1f, 0f);
+        _controller.height = 2f;
     }
 }

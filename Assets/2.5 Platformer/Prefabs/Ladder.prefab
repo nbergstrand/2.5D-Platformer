@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 6030824066757618113}
   m_Layer: 0
   m_Name: Climb_Up_Position
-  m_TagString: Ledge
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,12 +213,12 @@ GameObject:
   - component: {fileID: 6030824067090726849}
   - component: {fileID: 6030824067090726850}
   - component: {fileID: 6030824067090726851}
-  - component: {fileID: 6030824067090726848}
   - component: {fileID: 6030824067090726852}
   - component: {fileID: 6030824067090726853}
+  - component: {fileID: 6030824067090726848}
   m_Layer: 0
   m_Name: Top_Of_Ladder_Collider
-  m_TagString: Ledge
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,18 +284,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6030824067090726848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6030824067090726862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6846c22c500fecc4087fe5cab299e86a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &6030824067090726852
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -325,6 +313,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.0000000027939677, y: 0.0000076293945, z: 0.000022888184}
+--- !u!114 &6030824067090726848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6030824067090726862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6846c22c500fecc4087fe5cab299e86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6030824067463299312
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,9 +336,9 @@ GameObject:
   - component: {fileID: 6030824067462946000}
   - component: {fileID: 6030824067466337520}
   - component: {fileID: 6030824067465240112}
-  - component: {fileID: 6030824067463333463}
   - component: {fileID: 6030824067463333460}
   - component: {fileID: 6030824067463333461}
+  - component: {fileID: 6030824067463333463}
   m_Layer: 0
   m_Name: Ladder
   m_TagString: Untagged
@@ -410,22 +410,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6030824067463333463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6030824067463299312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b67969b87568124ea57c94937d31ad5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _grabRotation: {x: 0, y: 0, z: -9}
-  _climbUpPosition: {fileID: 6030824066757618126}
-  _topOfLadderCollider: {fileID: 6030824067090726862}
-  _climbUpRotation: {x: 0, y: 0, z: 0}
 --- !u!65 &6030824067463333460
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -455,3 +439,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6030824067463333463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6030824067463299312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b67969b87568124ea57c94937d31ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _grabRotation: {x: 0, y: 0, z: -9}
+  _climbUpPosition: {fileID: 6030824066757618126}
+  _topOfLadderCollider: {fileID: 6030824067090726862}
+  _climbUpRotation: {x: 0, y: 0, z: 0}
