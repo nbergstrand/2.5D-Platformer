@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     private float _speed = 10;
 
     [SerializeField]
+    private float _climbSpeed = 3;
+
+    [SerializeField]
     private float _gravity = 5;
 
     [SerializeField]
@@ -42,6 +45,11 @@ public class Player : MonoBehaviour
 
     bool _grabbingLedge;
     Vector3 _climbUpPosition;
+
+
+    Vector3 _climbUpRotation;
+    bool _grabbingLadder;
+    
     
     void Start()
     {
@@ -69,7 +77,23 @@ public class Player : MonoBehaviour
         {
             _animator.SetTrigger("climbing");
             
-        }        
+        }
+
+        if (_grabbingLadder)
+        {
+           
+            float verticlaInput = Input.GetAxis("Vertical");
+            _direction = new Vector3(0f, verticlaInput, 0f);
+
+            _velocity = _direction * _climbSpeed;
+            
+            _animator.SetFloat("climbSpeed", _velocity.y * Time.deltaTime * 25f);
+
+            if (_controller.enabled == true)
+                _controller.Move(_velocity * Time.deltaTime);
+
+            return;
+        }
 
 
         if (_controller.isGrounded == true)
@@ -174,7 +198,41 @@ public class Player : MonoBehaviour
         _grabbingLedge = false;
        _controller.enabled = true;
     }
+    
+    public void GrabLadder(Vector3 climbUpPosition, Vector3 grabRotation, Vector3 climbUpRotation)
+    {
+        
+        _grabbingLadder = true;
+        _animator.SetBool("ladderGrab", true);
+        transform.rotation = Quaternion.Euler(grabRotation);
+        _climbUpPosition = climbUpPosition;
+        _climbUpRotation = climbUpRotation;
 
+    }
+
+    public void SetTopOfLadderPosition()
+    {
+        transform.position = _climbUpPosition;
+        transform.rotation = Quaternion.Euler(_climbUpRotation);
+        _animator.SetBool("ladderGrab", false);
+        _grabbingLadder = false;
+        _velocity = Vector3.zero;
+        _controller.enabled = true;
+
+    }
+
+    public void ClimbDownLadder()
+    {
+        if(_grabbingLadder)
+        {
+            transform.rotation = Quaternion.Euler(_climbUpRotation);
+            _grabbingLadder = false;
+            _velocity = Vector3.zero;
+            _animator.SetBool("ladderGrab", false);
+            _animator.SetTrigger("climbDown");
+        }
+        
+    }
 
     public void KillPlayer()
     {

@@ -30,9 +30,14 @@ public class MovingPlatform : MonoBehaviour
         else
         {
             if(target == waypoints[0].position)
-                target = waypoints[1].position;
+            {
+                StartCoroutine(SetTarget(waypoints[1].position));
+            }
             else
-                target = waypoints[0].position;
+            {
+                StartCoroutine(SetTarget(waypoints[0].position));
+            }
+                
         }
     }
 
@@ -53,6 +58,12 @@ public class MovingPlatform : MonoBehaviour
             other.transform.parent = null;
         }
            
+    }
+
+    IEnumerator SetTarget(Vector3 position)
+    {
+        yield return new WaitForSeconds(5f);
+        target = position;
     }
 
 

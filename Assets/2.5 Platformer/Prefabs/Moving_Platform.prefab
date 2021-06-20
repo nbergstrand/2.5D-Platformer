@@ -3369,6 +3369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7301814411386840760}
   - component: {fileID: 7301814411386840761}
+  - component: {fileID: 1525433972}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -3414,6 +3415,19 @@ MonoBehaviour:
   - {fileID: 7301814412017456841}
   - {fileID: 7301814410728078900}
   speed: 20
+--- !u!65 &1525433972
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7301814411386840767}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 23.5}
+  m_Center: {x: -3.4, y: 68.99, z: 36}
 --- !u!1 &7301814411386974061
 GameObject:
   m_ObjectHideFlags: 0
@@ -6159,7 +6173,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7301814412233785560}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.8, y: 86.58, z: 163.6}
   m_LocalScale: {x: 13.421736, y: 2.0386746, z: 24.222914}
   m_Children:
