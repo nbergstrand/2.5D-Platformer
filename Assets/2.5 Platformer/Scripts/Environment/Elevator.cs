@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class Elevator : MonoBehaviour
 {
     [SerializeField]
@@ -96,6 +96,7 @@ public class Elevator : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Camera.main.gameObject.GetComponent<CinemachineBrain>().enabled = false;
 
             other.transform.parent = this.gameObject.transform;
         }
@@ -106,6 +107,8 @@ public class Elevator : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Camera.main.gameObject.GetComponent<CinemachineBrain>().enabled = true;
+
             other.transform.parent = null;
         }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-           
+            Camera.main.gameObject.GetComponent<CinemachineBrain>().enabled = false;
             other.transform.parent = this.gameObject.transform;
         }
     }
@@ -55,6 +56,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Camera.main.gameObject.GetComponent<CinemachineBrain>().enabled = true;
             other.transform.parent = null;
         }
            
@@ -62,7 +64,7 @@ public class MovingPlatform : MonoBehaviour
 
     IEnumerator SetTarget(Vector3 position)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         target = position;
     }
 
