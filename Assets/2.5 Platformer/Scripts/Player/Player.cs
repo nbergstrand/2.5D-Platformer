@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -115,10 +116,13 @@ public class Player : MonoBehaviour
 
             if (horizontalInput != 0)
             {
+                                           
+
                 float rotation = horizontalInput < 0 ? -180f : 0;
 
                 transform.rotation = Quaternion.Euler(0, rotation, 0f);
             }
+           
 
             _canJump = true;
             if (Input.GetKeyDown(KeyCode.Space))

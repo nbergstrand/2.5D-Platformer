@@ -47,6 +47,7 @@ public class MovingPlatform : MonoBehaviour
         if (other.tag == "Player")
         {
             Camera.main.gameObject.GetComponent<CinemachineBrain>().enabled = false;
+            Camera.main.gameObject.GetComponent<FollowCamera>().enabled = true;
             other.transform.parent = this.gameObject.transform;
         }
     }
@@ -57,6 +58,8 @@ public class MovingPlatform : MonoBehaviour
         if (other.tag == "Player")
         {
             Camera.main.gameObject.GetComponent<CinemachineBrain>().enabled = true;
+            Camera.main.gameObject.GetComponent<FollowCamera>().enabled = false;
+
             other.transform.parent = null;
         }
            

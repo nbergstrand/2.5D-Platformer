@@ -9,9 +9,13 @@ public class FollowCamera : MonoBehaviour
 
     [SerializeField]
     Vector3 offset;
+        
 
     void LateUpdate()
     {
-        transform.position = target.position - offset;
+       
+            transform.position = target.position - offset;
+        
     }
+
 }
